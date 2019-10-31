@@ -8,8 +8,13 @@ import {
   Platform,
   TouchableOpacity,
   Button,
-  ActivityIndicator
+  ActivityIndicator,
+  Dimensions, ScrollView
 } from 'react-native'
+
+import {
+  BarChart
+} from 'react-native-chart-kit';
 
 import ListView from 'deprecated-react-native-listview' // krn listview per okt 2019 deprecated, cara manggilnya tidak diimport dr react native scr langsung
 
@@ -92,7 +97,56 @@ export default class PegawaiRead extends Component {
             </Text>
           )}
         />
+
+         <ScrollView>
+      <View>
+      <Text
+              style={{
+                textAlign: 'center',
+                fontSize: 18,
+                padding: 16,
+                marginTop: 16,
+              }}>
+              Bar Chart
+            </Text>
+            <BarChart
+              data={{
+                labels: [
+                  'January',
+                  'February',
+                  'March',
+                  'April',
+                  'May',
+                  'June',
+                ],
+                datasets: [
+                  {
+                    data: [rowData.pegawai_nama],
+                  },
+                ],
+              }}
+              width={Dimensions.get('window').width - 16}
+              height={180}
+              yAxisLabel={''}
+              chartConfig={{
+                backgroundColor: '#1cc910',
+                backgroundGradientFrom: '#eff3ff',
+                backgroundGradientTo: '#efefef',
+                decimalPlaces: 2,
+                color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+                style: {
+                  borderRadius: 16,
+                },
+              }}
+              style={{
+                marginVertical: 8,
+                borderRadius: 16,
+              }}
+            />
       </View>
+      </ScrollView>
+      </View>
+     
     )
   }
 }
